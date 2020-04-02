@@ -1,0 +1,145 @@
+<article class="row">
+
+    <section class="col-12 col-xl-10 offset-xl-1">
+
+
+        <header>
+
+            <div id="summary-box" class="d-flex">
+
+                <div class="summary">
+                    <div class="heading">
+                        <div class="icon-holder bg-blue-transparent"><img
+                            src="assets/images/icons/paper-stack-alt-solid-icon.png" height="20px"/></div>
+                        <div class="description-header">
+                            {{dashboardSummary.totalTitles}}
+                        </div>
+                    </div>
+                    <div class="description-text">
+                        Total Titles
+                    </div>
+                </div>
+
+                <div class="summary">
+                    <div class="heading">
+                        <div class="icon-holder bg-blue-transparent"><img
+                            src="assets/images/icons/paper-stack-alt-solid-icon.png" height="20px"/></div>
+                        <div class="description-header">
+                            {{dashboardSummary.totalEpisode}}
+                        </div>
+                    </div>
+                    <div class="description-text">
+                        Total Episode Versions
+                    </div>
+                </div>
+
+                <div class="summary">
+
+                    <div class="heading">
+                        <div class="icon-holder bg-brown-transparent">
+                            <img src="assets/images/icons/done-icon.png" height="15px"/></div>
+                        <div class="description-header">
+                            {{dashboardSummary.totalVerified}}
+
+                        </div>
+                    </div>
+                    <div class="description-text">
+                       Total Verified
+                    </div>
+                </div>
+                <div class="summary">
+                    <div class="heading">
+                        <div class="icon-holder bg-green-transparent"><img src="assets/images/icons/check-icon.png"
+                                                                           height="20px"/></div>
+                        <div class="description-header">
+                            {{dashboardSummary.totalAvailable}}
+                        </div>
+                    </div>
+                    <div class="description-text">
+                        Total Available
+                    </div>
+                </div>
+                <div class="summary">
+                    <div class="heading">
+                        <div class="icon-holder bg-green-transparent">
+                            <img src="assets/images/icons/play.png" height="15px"/></div>
+                        <div class="description-header">
+                            {{dashboardSummary.totalPlaying}}
+                        </div>
+                    </div>
+                    <div class="description-text">
+                        Total Playable
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="search-box" class="mt-5 d-flex">
+                <nb-select placeholder="Select Source" filled status="primary" size="large"
+                           [(selected)]="selectedSource">
+                    <nb-option value="funimation">Funimation</nb-option>
+                </nb-select>
+                <nb-select placeholder="Filter" filled status="default" size="large" [(selected)]="selectedFilter"
+                           (selectedChange)="search()">
+                    <nb-option value="">All</nb-option>
+                    <nb-option value="not-verified">Not Yet Verified</nb-option>
+                    <nb-option value="not-available">Not Available</nb-option>
+                    <nb-option value="available-not-playing">Available - Not Playing</nb-option>
+                    <nb-option value="available-playing">Available - Playing</nb-option>
+                </nb-select>
+                <input nbInput status="default" placeholder="Search" size="large" [(ngModel)]="inputSearchText"
+                       (keydown.enter)="search()"/>
+
+                <button
+                    nbButton outline status="primary"
+                    [hidden]="this.viewStyle !== 'stack'" class="ml-3 expand-button" size="small"
+                    (click)="stackViewComponent.toggleAccordionAll()">
+                    {{stackViewComponent.accordionToggleState === 'expanded' ? 'Collapse' : 'Expand' }} All
+                </button>
+
+                <button class="ml-3 expand-button" nbButton outline status="primary" size="small"
+                        [hidden]="this.viewStyle !== 'list'"
+                        (click)="listViewComponent.verifyContent()">
+                    Verify
+                </button>
+
+                <div class="list-style-control">
+                    <div class="style" [ngClass]="{active: showStackView}" (click)="setContentView('stack')">
+                        <nb-icon icon="layers-outline" size=""></nb-icon>
+                    </div>
+                    <div class="style" [ngClass]="{active: showListView}" (click)="setContentView('list')">
+                        <nb-icon icon="list-outline"></nb-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 text-center"><span *ngIf="isGrinding" class="spinner primary"></span></div>
+        </header>
+
+<p>Last Refreshed on: {{lastRefresh | date: 'short'}}</p>
+        <app-content-list-view
+            #listViewComponent
+            [hidden]="!showListView"
+            [episodes]="rawEpisodes"
+            (verify)="onVerify($event)"
+        ></app-content-list-view>
+
+
+        <app-content-stack-view
+            #stackViewComponent
+            [hidden]="!showStackView"
+            [future]="isFutureContent"
+            [episodes]="rawEpisodes"
+            (verify)="onVerify($event)"
+        ></app-content-stack-view>
+
+
+        <mat-paginator class="mt-3"
+                       [length]="pageLength"
+                       [pageSize]="200"
+                       [pageSizeOptions]="[100, 200, 500, 1000]"
+                       [showFirstLastButtons]="true"
+                       (page)="pageEvent = paginate($event)">
+        </mat-paginator>
+    </section>
+    <app-background-task #backgroundTask (completed)="onBackgroundTaskCompleted($event)"></app-background-task>
+</article>

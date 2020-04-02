@@ -1,0 +1,24 @@
+/// Reset Bootstrap variables
+
+// Color system
+$primary:       #2452CB !default;
+
+// Fonts
+$font-family-serif:  "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", Times, Georgia, serif !default;
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-roboto: Roboto, $font-family-sans-serif !default;
+$font-family-base: $font-family-roboto !default;
+
+/// App specific variables
+
+// Relative or absolute URL where all assets are served from
+$STATIC_DOMAIN : '/assets/' !default;
+
+
+
+
+/// Import Bootstrap tools
+
+@import
+'~bootstrap/scss/functions',
+'~bootstrap/scss/variables';

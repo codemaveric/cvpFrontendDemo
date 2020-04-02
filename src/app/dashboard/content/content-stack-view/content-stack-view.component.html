@@ -1,0 +1,119 @@
+<nb-accordion class="movie-list" style="background:#F3F3F3" multi #accordion>
+    <nb-accordion-item *ngFor="let title of titles" style="margin-bottom: 20px;border-radius: 10px;"
+                       [expanded]="isFutureContent">
+        <nb-accordion-item-header class="movie-header d-flex justify-content-between">
+
+            <div class="description d-flex">
+                <img [src]="title.showThumbnail"/>
+                <h5><a target="_blank" style="color: #222b45;"
+                       href="https://funimation.com/shows/{{title.titleSlug}}">{{title.titleName}}</a></h5>
+            </div>
+
+
+            <div class="summary d-flex justify-content-end">
+                <div class="d-flex mt-2">
+                    <div class="status">
+                        <label>Total:</label>
+                        <span class="ml-2 status-available">{{title.totalEpisodes}}</span>
+                    </div>
+
+                    <div class="status ml-3">
+                        <label>Verified:</label> <span
+                        class="ml-2 status-available">{{title.totalVerified}}</span>
+                    </div>
+                    <div class="status ml-3">
+                        <label>Plays:</label> <span
+                        class="ml-2 status-available">{{title.totalPlaying}}</span>
+                    </div>
+                </div>
+                <button class="mt-2" style="margin-left: 10px;" nbButton (click)="verifyContent($event, title)"
+                        status="primary" shape="round" size="tiny">Verify
+                </button>
+            </div>
+
+        </nb-accordion-item-header>
+        <nb-accordion-item-body class="movie-body">
+            <perfect-scrollbar style="position: relative; max-height: 500px;">
+                <div class="seasons" *ngFor="let season of title.seasons">
+                    <div class="season-header d-flex">
+                        <div class="checkbox text-center">
+                            <nb-checkbox (checkedChange)="checkboxToggle($event, season)"></nb-checkbox>
+                        </div>
+
+                        {{season.name}}
+                    </div>
+
+
+                    <ul class="episodes">
+
+                        <li class="episode-header">
+                            <div class="col-4 d-flex">
+                                <div class="col-2"></div>
+                                <div class="col-2">No.</div>
+                                <div class="col-8">Episode</div>
+                            </div>
+                            <div class="col-1 text-center">Language</div>
+                            <div class="col-1 text-center">Version</div>
+                            <div class="col-1 text-center">Purchase</div>
+                            <div class="col-1 text-center">Available</div>
+                            <div class="col-1 text-center">Play</div>
+
+                            <div class="col-3 d-flex">
+                                <div class="col-6 text-center">Showtime</div>
+                                <div class="col-6 text-center">Verified</div>
+                            </div>
+                        </li>
+
+                        <li class="episode-body" *ngFor="let episode of season.episodes">
+                            <div class="col-4 d-flex">
+                                <div class="text-center col-2">
+                                    <nb-checkbox [(ngModel)]="episode.checked"></nb-checkbox>
+                                </div>
+                                <div class="col-2">{{episode.episodeNumber}}</div>
+                                <div class="title col-8">
+                                    <a style="color:black" target="_blank"
+                                       href="https://funimation.com/shows/{{episode.titleSlug}}/{{episode.episodeSlug}}?lang={{episode.language | lowercase}}">{{ episode.name }}</a>
+                                </div>
+                            </div>
+
+                            <div class="col-1 text-center">
+                                {{episode.language}}
+                            </div>
+
+                            <div class="col-1 text-center">
+                                {{episode.version}}
+                            </div>
+                            <div class="col-1 text-center">
+                                {{episode.purchase}}
+                            </div>
+                            <div class="col-1 text-center">
+                                <img
+                                    [src]="'assets/images/icons/' +  (episode.isVerified ? (episode.isAvailable ? 'check-icon.png' : 'close-icon.png') : 'pending.png') "
+                                    height="20px"/>
+                            </div>
+
+                            <div class="col-1 text-center">
+                                <img
+                                    [src]="'assets/images/icons/' +  (episode.isVerified ? (episode.isPlaying ? 'playing.png' : 'close-icon.png') : 'pending.png') "
+                                    height="20px"/>
+                            </div>
+
+                            <div class="col-3 d-flex" style="padding:0px;">
+                                <div class="col-6 text-center">
+                                    {{episode.startDate | date: 'short' }}
+                                </div>
+                                <div class="col-6 text-center" *ngIf="episode.isVerified">
+                                    {{episode.verifiedOn | date: 'short' }}
+                                </div>
+                                <div class="col-6 text-center" *ngIf="!episode.isVerified">
+                                    NOT YET VERIFIED
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </perfect-scrollbar>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

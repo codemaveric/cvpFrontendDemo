@@ -1,0 +1,47 @@
+@import "../../../styles";
+@import '../../../themes';
+
+nb-layout-column:nth-child(2) {
+    flex: 4 !important;
+}
+
+
+.nav-icon img {
+    width: 51px;
+}
+
+.menu-items ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        font-family: $font-family-base;
+
+        &:last-child {
+            margin-left: 70px;
+        }
+
+        a{
+            color: #999999;
+            font-size: $font-size-base * 0.9;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+
+            &:hover, &.active {
+                text-decoration: none;
+                color: $primary;
+            }
+        }
+    }
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    font-family: $font-family-base;
+}

@@ -1,0 +1,323 @@
+@import "../../../styles";
+
+header {
+    margin-bottom: 20px;
+    width: 100%;
+
+    #search-box {
+        width: 100%;
+
+        nb-select {
+            &:nth-child(1) .select-button {
+                min-width: 150px;
+                background: #8491B2;
+                border: none;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            &:nth-child(2) .select-button {
+                min-width: 250px;
+                border-radius: 0;
+                border: 1px solid #EFEFEF;
+            }
+        }
+
+        input {
+            width: 100%;
+            max-width: unset;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border: 1px solid #EFEFEF;
+            background: white url(#{$STATIC_DOMAIN}/images/icons/search-icon.png) no-repeat 97%;
+            background-size: 20px;
+            font-weight: normal;
+        }
+
+        .expand-button {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .list-style-control {
+            display: flex;
+            border: 1px solid #3366ff;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border-left: none;
+
+
+            .style {
+                padding: 7px 10px;
+                cursor: pointer;
+                color: #3366ff;
+
+                &:hover, &.active {
+                    background-color: #3366ff;
+                    color: #fff;
+                    // background-color: rgba(51, 102, 255, 0.16)
+                }
+
+                &:last-child {
+                    border-left: 1px solid #3366ff;
+                }
+
+                nb-icon {
+                    font-size: $font-size-base * 2;
+                }
+            }
+        }
+    }
+}
+
+ul.episodes {
+    margin-left: 70px;
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+
+    li {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-family: $font-family-base;
+
+
+        div {
+            flex: auto;
+        }
+
+
+        &.episode-header {
+            padding: 15px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            color: #919191;
+        }
+
+        &.episode-body {
+            padding: 15px 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        &:hover {
+            background-color: white;
+        }
+
+        .title {
+            font-size: $font-size-sm;
+            color: inherit;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .status {
+            text-align: center;
+            font-size: $font-size-sm;
+
+        }
+
+
+    }
+}
+
+
+nb-accordion-item-header img {
+    width: 60px;
+    border-radius: 6px;
+
+}
+
+.movie-header {
+
+    .description {
+        overflow: hidden;
+        width: 70%;
+
+
+        h5 {
+            margin-left: 20px;
+            font-weight: normal;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .summary {
+        width: 100%;
+        font-weight: normal;
+        font-family: $font-family-base;
+
+        .status {
+            border-radius: 38px;
+            height: 31px;
+            border: 1px solid rgba(116, 148, 232, 0.28);
+
+            label {
+                margin-left: 20px;
+                color: #919191;
+            }
+
+            span {
+                display: inline-block;
+                height: 100%;
+                width: 40px;
+                text-align: center;
+                border-radius: 38px;
+                padding: 3px 0;
+                color: white;
+
+
+                &.status-available {
+                    background-color: #7494E8;
+                }
+
+                &.status-play {
+                    background-color: rgba(242, 153, 74, 0.79);;
+                }
+            }
+        }
+    }
+
+
+    button {
+        letter-spacing: 2px;
+        margin-right: 40px;
+    }
+
+
+    .expansion-indicator {
+        background: rgb(51, 102, 255);
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+        margin-top: 8px;
+
+        path {
+            fill: white;
+        }
+    }
+}
+
+.nb-theme-default nb-accordion-item-body.movie-body .item-body {
+    padding: 0;
+}
+
+
+.movie-body {
+
+    .season-header {
+        padding: 15px 20px;
+        background-color: #F3F3F3;
+        color: #495166;
+        font-size: $font-size-base * 1.1;
+        font-weight: bold;
+
+        .checkbox {
+            width: 100px
+        }
+    }
+}
+
+
+#summary-box {
+    justify-content: space-between;
+
+    .summary {
+        display: flex;
+        flex-direction: column;
+        max-width: 250px;
+        flex: 1;
+        padding: 15px;
+        background: white;
+        box-shadow: 0 10px 60px rgba(0, 0, 0, 0.06);
+        border-radius: 6px;
+
+        & > .heading {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .icon-holder {
+            width: 47px;
+            height: 47px;
+            border-radius: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            img {
+                margin: 0 auto;
+            }
+
+
+            &.bg-blue-transparent {
+                background: rgba(36, 82, 203, 0.08);
+            }
+
+            &.bg-brown-transparent {
+                background: rgba(245, 175, 112, 0.15);
+            }
+
+            &.bg-green-transparent {
+                background: rgba(229, 255, 248, 0.6);
+            }
+        }
+
+        .description-header {
+            font-size: $font-size-lg * 1.5;
+            padding: 10px;
+            font-weight: normal;
+            text-align: right;
+        }
+
+        .description-text {
+            text-align: right;
+            color: rgba(63, 63, 63, 0.5);
+            font-size: $font-size-base;
+        }
+
+    }
+
+
+    @include media-breakpoint-down(xl) {
+        .summary {
+            max-width: 200px;
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        .summary {
+            max-width: 180px;
+            .description-text {
+                font-size: $font-size-base * 0.9;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .summary {
+            max-width: 150px;
+            .description-text {
+                font-size: $font-size-base * 0.8;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(sm) {
+        .summary {
+            max-width: 130px;
+        }
+    }
+
+
+}

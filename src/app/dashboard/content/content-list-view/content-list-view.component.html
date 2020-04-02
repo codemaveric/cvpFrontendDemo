@@ -1,0 +1,83 @@
+<div class="content-list-style">
+    <ul class="episodes">
+
+        <li class="episode-header">
+            <div class="col-5 d-flex" style="padding:0px;">
+                <div class="col-1">
+                    <div class="checkbox text-center">
+                        <nb-checkbox (checkedChange)="checkboxToggle($event)"></nb-checkbox>
+                    </div>
+                </div>
+                <div class="col-5">Title</div>
+                <div class="col-1">No.</div>
+                <div class="col-5">Episode</div>
+            </div>
+            <div class="col-4 d-flex" style="padding:0px;">
+            <div class="col-3 text-center">Language</div>
+            <div class="col-2 text-center">Version</div>
+            <div class="col-3 text-center">Purchase</div>
+            <div class="col-2 text-center">Available</div>
+            <div class="col-2 text-center">Play</div>
+            </div>
+            <div class="col-3 d-flex" style="padding:0px;">
+                <div class="col-6 text-center">Showtime</div>
+                <div class="col-6 text-center">Verified</div>
+            </div>
+        </li>
+
+        <li class="episode-body" *ngFor="let episode of episodes">
+            <div class="col-5 d-flex" style="padding:0px;">
+                <div class="text-center col-1">
+                    <nb-checkbox [(ngModel)]="episode.checked"></nb-checkbox>
+                </div>
+                <div class="title col-5">
+                    <a style="color:black" target="_blank"
+                       href="https://funimation.com/shows/{{episode.titleSlug}}">{{ episode.title }}</a>
+                </div>
+                <div class="col-1">{{episode.episodeNumber}}</div>
+                <div class="title col-5">
+                    <a style="color:black" target="_blank"
+                       href="https://funimation.com/shows/{{episode.titleSlug}}/{{episode.episodeSlug}}?lang={{episode.language | lowercase}}">{{ episode.name }}</a>
+                </div> 
+            </div>
+            <div class="col-4 d-flex" style="padding:0px;">
+                <div class="col-3 text-center">
+                {{episode.language}}
+            </div>
+
+            <div class="col-2 text-center">
+                {{episode.version}}
+            </div>
+            <div class="col-3 text-center">
+                {{episode.purchase}}
+            </div>
+            <div class="col-2 text-center">
+                <img
+                    [src]="'assets/images/icons/' +  (episode.isVerified ? (episode.isAvailable ? 'check-icon.png' : 'close-icon.png') : 'pending.png') "
+                    height="20px"/>
+            </div>
+
+            <div class="col-2 text-center">
+                <img
+                    [src]="'assets/images/icons/' +  (episode.isVerified ? (episode.isPlaying ? 'playing.png' : 'close-icon.png') : 'pending.png') "
+                    height="20px"/>
+            </div>
+            </div>
+            
+
+            <div class="col-3 d-flex" style="padding:0px;">
+                <div class="col-6 text-center">
+                    {{episode.startDate | date: 'short' }}
+                </div>
+                <div class="col-6 text-center" *ngIf="episode.isVerified">
+                    {{episode.verifiedOn | date: 'short' }}
+                </div>
+                <div class="col-6 text-center" *ngIf="!episode.isVerified">
+                    NOT YET VERIFIED
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+</div>

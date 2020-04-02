@@ -1,0 +1,31 @@
+@import "../../../styles";
+
+#layer {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#auth-box {
+    width: 500px;
+
+    .brand-logo {
+        width: 100px;
+    }
+
+    input {
+        margin-bottom: 15px;
+    }
+
+
+    .error-message {
+        padding: 5px 15px;
+        color: white;
+        background: $danger;
+        margin-bottom: 10px;
+    }
+}

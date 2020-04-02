@@ -1,0 +1,35 @@
+@import "../../../styles";
+
+article {
+    position: fixed;
+    width: 500px;
+    right: 10px;
+    bottom: 10px;
+    border-radius: 6px;
+    background: $primary;
+    overflow: hidden;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.06);
+
+
+
+        .heading {
+            background: $primary;
+            padding: 10px 0 0 15px;
+            color: white;
+            margin: 0;
+
+
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                li {color: white}
+            }
+        }
+
+        section {
+            padding: 20px;
+        }
+
+
+}
